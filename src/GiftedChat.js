@@ -155,7 +155,9 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
-    if (Platform.OS === 'android') {
+    const { excludeKeyboardSize } = this.props;
+
+    if (Platform.OS === 'android' || excludeKeyboardSize) {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
       // So for calculate the messages container height ignore keyboard height.
@@ -511,7 +513,8 @@ GiftedChat.defaultProps = {
   minInputToolbarHeight: 44,
   isLoadingEarlier: false,
   messageIdGenerator: () => uuid.v4(),
-  maxInputLength: null
+  maxInputLength: null,
+  excludeKeyboardSize: false
 };
 
 GiftedChat.propTypes = {
@@ -545,6 +548,7 @@ GiftedChat.propTypes = {
   isLoadingEarlier: PropTypes.bool,
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
+  excludeKeyboardSize: PropTypes.bool
 };
 
 export {
