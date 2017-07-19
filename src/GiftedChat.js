@@ -68,7 +68,6 @@ class GiftedChat extends React.Component {
     this.onMainViewLayout = this.onMainViewLayout.bind(this);
     this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
 
-
     this.invertibleScrollViewProps = {
       inverted: true,
       keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
@@ -355,6 +354,7 @@ class GiftedChat extends React.Component {
     const keyboardHeight = excludeKeyboardSize ? this.getKeyboardHeight() : 0;
     const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, size.height));
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight) + keyboardHeight;
+    
     this.setState({
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
