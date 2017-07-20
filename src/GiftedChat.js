@@ -68,6 +68,7 @@ class GiftedChat extends React.Component {
     this.onMainViewLayout = this.onMainViewLayout.bind(this);
     this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
 
+
     this.invertibleScrollViewProps = {
       inverted: true,
       keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
@@ -350,11 +351,8 @@ class GiftedChat extends React.Component {
   }
 
   onInputSizeChanged(size) {
-    const { excludeKeyboardSize } = this.props;
-    const keyboardHeight = excludeKeyboardSize ? this.getKeyboardHeight() : 0;
     const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, size.height));
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight) + keyboardHeight;
-    
+    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
     this.setState({
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
@@ -513,8 +511,7 @@ GiftedChat.defaultProps = {
   minInputToolbarHeight: 44,
   isLoadingEarlier: false,
   messageIdGenerator: () => uuid.v4(),
-  maxInputLength: null,
-  excludeKeyboardSize: false
+  maxInputLength: null
 };
 
 GiftedChat.propTypes = {
@@ -548,7 +545,6 @@ GiftedChat.propTypes = {
   isLoadingEarlier: PropTypes.bool,
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
-  excludeKeyboardSize: PropTypes.bool
 };
 
 export {
